@@ -319,6 +319,38 @@
     flex-shrink: 0;
   }
 
+  /* 블록 개수 라벨 (10 × N, 1 × M) */
+  .count-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    padding: 4px 12px;
+    background: white;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    font-family: 'Jua', sans-serif;
+    font-size: 1.1rem;
+    box-shadow: 2px 2px 0 var(--ink);
+    animation: blockPop 0.4s ease-out 0.3s both;
+  }
+
+  .count-ten {
+    color: var(--block-ten-dark);
+    font-weight: bold;
+  }
+
+  .count-one {
+    color: var(--block-one-dark);
+    font-weight: bold;
+  }
+
+  .count-plus {
+    color: var(--ink);
+    opacity: 0.5;
+    font-size: 0.9rem;
+  }
+
   .ten-block {
     width: 16px;
     height: 64px;
@@ -484,6 +516,7 @@
     .ten-block { width: 14px; height: 56px; }
     .one-block { width: 14px; height: 14px; }
     .row-label { width: 60px; font-size: 1rem; }
+    .count-label { font-size: 0.95rem; padding: 3px 8px; margin-left: 8px; gap: 4px; }
     .btn { font-size: 1rem; padding: 10px 16px; }
   }
 </style>
@@ -621,6 +654,7 @@
     el.helpBtn.style.display = '';
     el.helpBtn.disabled = false;
     el.mergeBtn.style.display = 'none';
+    el.mergeBtn.disabled = false;
     el.nextBtn.style.display = 'none';
 
     // 객관식 보기 4개 생성
@@ -703,6 +737,19 @@
       block.style.animationDelay = ((tens * 0.05) + i * 0.04) + 's';
       rowEl.appendChild(block);
     }
+
+    // 오른쪽에 개수 라벨 추가 (10 × N, 1 × M)
+    const countLabel = document.createElement('div');
+    countLabel.className = 'count-label';
+    let parts = [];
+    if (tens > 0) {
+      parts.push(`<span class="count-ten">10 × ${tens}</span>`);
+    }
+    if (ones > 0) {
+      parts.push(`<span class="count-one">1 × ${ones}</span>`);
+    }
+    countLabel.innerHTML = parts.join('<span class="count-plus">+</span>');
+    rowEl.appendChild(countLabel);
   }
 
   // 도움받기: 블록 보여주기
@@ -714,7 +761,7 @@
     renderBlocks(state.num2, el.row2);
     el.feedback.textContent = '블록을 세어봐! 🧱';
     el.feedback.className = 'feedback hint';
-    el.helpBtn.disabled = true;
+    el.helpBtn.style.display = 'none';  // 한 번 보여줬으면 숨김
 
     // 합쳤을 때 낱개가 10개 이상이면 묶음 만들기 버튼 활성화
     const ones1 = state.num1 % 10;
@@ -746,7 +793,7 @@
 
     // 즉시 힌트 메시지 변경 - "10 만들기" 전략 설명
     el.feedback.innerHTML = `빨간 블록 ${ones1} + ${needFromRow2} = <b>10</b>! 묶을 수 있어 ✨`;
-    el.mergeBtn.disabled = true;
+    el.mergeBtn.style.display = 'none';  // 한 번 누르면 숨김
 
     // 1.5초 대기 (아이가 10 만들기를 인식할 시간)
     setTimeout(() => {
@@ -783,6 +830,19 @@
           block.style.animationDelay = (totalTens * 0.08 + i * 0.05) + 's';
           newRow.appendChild(block);
         }
+
+        // 합계 행에도 카운트 라벨 추가
+        const sumLabel = document.createElement('div');
+        sumLabel.className = 'count-label';
+        let sumParts = [];
+        if (totalTens > 0) {
+          sumParts.push(`<span class="count-ten">10 × ${totalTens}</span>`);
+        }
+        if (remainingOnes > 0) {
+          sumParts.push(`<span class="count-one">1 × ${remainingOnes}</span>`);
+        }
+        sumLabel.innerHTML = sumParts.join('<span class="count-plus">+</span>');
+        newRow.appendChild(sumLabel);
 
         el.blocksArea.appendChild(newRow);
         el.mergeBtn.style.display = 'none';
