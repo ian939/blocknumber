@@ -80,6 +80,34 @@
     text-shadow: 3px 3px 0 white, 4px 4px 0 var(--block-eleven-dark);
     letter-spacing: 1px;
     margin-bottom: 4px;
+    cursor: default;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 부모 모드 토스트 */
+  .parent-toast {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--block-eleven);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 16px;
+    font-family: 'Jua', sans-serif;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 0 var(--block-eleven-dark);
+    z-index: 200;
+    animation: toastFade 1.2s ease-out forwards;
+    pointer-events: none;
+  }
+
+  @keyframes toastFade {
+    0% { opacity: 0; transform: translate(-50%, -10px); }
+    20% { opacity: 1; transform: translate(-50%, 0); }
+    80% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -20px); }
   }
 
   .subtitle {
@@ -135,6 +163,168 @@
     0% { transform: scale(0); }
     60% { transform: scale(1.3); }
     100% { transform: scale(1); }
+  }
+
+  .reset-btn {
+    background: white;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 3px 0 var(--ink);
+    transition: transform 0.1s, box-shadow 0.1s;
+    margin-left: auto;
+  }
+
+  .reset-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--ink); }
+  .reset-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+
+  /* 업그레이드 배너 */
+  .upgrade-banner {
+    background: linear-gradient(135deg, #FFE66D 0%, #FFC940 100%);
+    border: 4px solid var(--ink);
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 6px 0 var(--ink);
+    margin-bottom: 16px;
+    text-align: center;
+    animation: bannerPulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes bannerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+
+  .upgrade-text {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .btn-upgrade {
+    background: var(--block-eleven);
+    color: white;
+    font-family: 'Jua', sans-serif;
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--ink);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .btn-upgrade:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+  .btn-upgrade:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--ink); }
+
+  /* 모드 전환 토글 */
+  .mode-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+
+  .mode-btn {
+    flex: 1;
+    max-width: 200px;
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    padding: 10px;
+    font-family: 'Jua', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 3px 0 var(--ink);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .mode-btn.active {
+    background: var(--block-ten);
+    color: white;
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--ink);
+  }
+
+  /* Number Bond 시각화 */
+  .bond-display {
+    text-align: center;
+    padding: 16px 0 8px;
+  }
+
+  .bond-whole {
+    display: inline-block;
+    min-width: 80px;
+    padding: 10px 16px;
+    background: white;
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    font-family: 'Jua', sans-serif;
+    font-size: 2.4rem;
+    color: var(--ink);
+    box-shadow: 0 4px 0 var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .bond-lines {
+    display: block;
+    width: 200px;
+    height: 40px;
+    margin: 0 auto;
+    color: var(--ink);
+  }
+
+  .bond-parts {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 16px;
+  }
+
+  .bond-part {
+    min-width: 70px;
+    padding: 8px 14px;
+    background: white;
+    border: 4px solid var(--ink);
+    border-radius: 14px;
+    font-family: 'Jua', sans-serif;
+    font-size: 2rem;
+    color: var(--ink);
+    box-shadow: 0 4px 0 var(--ink);
+  }
+
+  .bond-whole.unknown, .bond-part.unknown {
+    background: #FFF9E0;
+    border-style: dashed;
+    color: var(--block-eleven);
+  }
+
+  .bond-whole.correct-flash, .bond-part.correct-flash {
+    background: #E8F5E1;
+    border-color: var(--grass);
+    color: var(--ink);
+    animation: bounce 0.6s;
+  }
+
+  .bond-whole.wrong-flash, .bond-part.wrong-flash {
+    background: #FFE5E5;
+    border-color: var(--block-eleven);
+    animation: shake 0.4s;
+  }
+
+  .bond-equation {
+    font-family: 'Jua', sans-serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-top: 8px;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 10px;
+    display: inline-block;
   }
 
   /* 난이도 선택 */
@@ -536,6 +726,19 @@
     <div class="stars-label">⭐ 모은 별</div>
     <div class="stars-count-big" id="stars-count">0</div>
     <div class="stars-display" id="stars-display"></div>
+    <button class="reset-btn" id="reset-btn" title="별 초기화">🔄</button>
+  </div>
+
+  <!-- 업그레이드 배너: 별 200개 달성 + 아직 잠금 해제 안 됨 -->
+  <div class="upgrade-banner" id="upgrade-banner" style="display:none;">
+    <div class="upgrade-text">🎉 별 200개 달성! 새로운 모드가 열렸어요!</div>
+    <button class="btn btn-upgrade" id="upgrade-btn">난이도 업그레이드 ✨</button>
+  </div>
+
+  <!-- 모드 전환: 업그레이드 완료된 사용자만 -->
+  <div class="mode-toggle" id="mode-toggle" style="display:none;">
+    <button class="mode-btn" data-mode="classic">🧱 블록 더하기</button>
+    <button class="mode-btn" data-mode="bond">🔗 수 가족</button>
   </div>
 
   <div class="difficulty-section">
@@ -548,8 +751,23 @@
   </div>
 
   <div class="problem-card">
-    <div class="problem-display">
+    <!-- 클래식 모드: 가로 덧셈 식 -->
+    <div class="problem-display classic-display" id="classic-display">
       <span class="problem-num" id="num1">7</span><span class="plus-sign">+</span><span class="problem-num" id="num2">5</span><span class="equals">=</span><span class="answer-slot" id="answer-slot">?</span>
+    </div>
+
+    <!-- 수 가족 모드: Number Bond 시각화 -->
+    <div class="bond-display" id="bond-display" style="display:none;">
+      <div class="bond-whole" id="bond-whole">12</div>
+      <svg class="bond-lines" viewBox="0 0 200 60" preserveAspectRatio="none">
+        <line x1="100" y1="0" x2="40" y2="60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <line x1="100" y1="0" x2="160" y2="60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="bond-parts">
+        <div class="bond-part" id="bond-part1">7</div>
+        <div class="bond-part" id="bond-part2">5</div>
+      </div>
+      <div class="bond-equation" id="bond-equation">7 + 5 = ?</div>
     </div>
 
     <div class="choices" id="choices"></div>
@@ -574,12 +792,56 @@
 </div>
 
 <script>
+  // 업그레이드 임계값
+  const UPGRADE_THRESHOLD = 200;
+
+  // 저장된 데이터 불러오기 (없으면 기본값)
+  const STORAGE_KEY = 'block_math_game_v1';
+  function loadSaved() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const data = JSON.parse(saved);
+        return {
+          stars: data.stars || 0,
+          level: data.level || 1,
+          unlocked: data.unlocked || false,
+          mode: data.mode || 'classic',
+        };
+      }
+    } catch(e) {
+      console.warn('저장된 데이터를 불러올 수 없어요:', e);
+    }
+    return { stars: 0, level: 1, unlocked: false, mode: 'classic' };
+  }
+
+  function saveProgress() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        stars: state.stars,
+        level: state.level,
+        unlocked: state.unlocked,
+        mode: state.mode,
+      }));
+    } catch(e) {
+      console.warn('저장 실패:', e);
+    }
+  }
+
+  const saved = loadSaved();
+
   let state = {
-    stars: 0,
-    level: 1,
+    stars: saved.stars,
+    level: saved.level,
+    unlocked: saved.unlocked,
+    mode: saved.mode,  // 'classic' 또는 'bond'
     num1: 7,
     num2: 5,
     answer: 12,
+    bondWhole: 12,    // 합
+    bondPart1: 7,     // 부분 1
+    bondPart2: 5,     // 부분 2
+    bondBlank: 'p2',  // 빈칸 위치: 'whole' | 'p1' | 'p2'
     helpUsed: false,
     blocksShown: false,
     canMerge: false,
@@ -601,44 +863,73 @@
     nextBtn: document.getElementById('next-btn'),
     starsCount: document.getElementById('stars-count'),
     starsDisplay: document.getElementById('stars-display'),
+    upgradeBanner: document.getElementById('upgrade-banner'),
+    upgradeBtn: document.getElementById('upgrade-btn'),
+    modeToggle: document.getElementById('mode-toggle'),
+    classicDisplay: document.getElementById('classic-display'),
+    bondDisplay: document.getElementById('bond-display'),
+    bondWhole: document.getElementById('bond-whole'),
+    bondPart1: document.getElementById('bond-part1'),
+    bondPart2: document.getElementById('bond-part2'),
+    bondEquation: document.getElementById('bond-equation'),
   };
 
   // 난이도별 문제 생성
   function generateProblem() {
-    let n1, n2;
-    if (state.level === 1) {
-      // 쉬움: 두 자리 + 한 자리
-      n1 = Math.floor(Math.random() * 80) + 10; // 10-89
-      n2 = Math.floor(Math.random() * 8) + 2;   // 2-9
-    } else if (state.level === 2) {
-      // 보통: 두 자리 + 두 자리 (합 100 미만)
-      // 합이 100을 안 넘도록 보장
-      n1 = Math.floor(Math.random() * 40) + 10; // 10-49
-      n2 = Math.floor(Math.random() * 40) + 10; // 10-49
-    } else {
-      // 어려움: 두 자리 + 두 자리, 합이 100 이상 (세 자리 결과)
-      // n1 + n2 >= 100이 보장되도록
-      n1 = Math.floor(Math.random() * 40) + 50; // 50-89
-      n2 = Math.floor(Math.random() * 40) + 50; // 50-89
-    }
-    state.num1 = n1;
-    state.num2 = n2;
-    state.answer = n1 + n2;
+    // 공통 상태 초기화
     state.helpUsed = false;
     state.blocksShown = false;
     state.canMerge = false;
     state.solved = false;
     state.wrongCount = 0;
 
-    el.num1.textContent = n1;
-    el.num2.textContent = n2;
     el.answerSlot.textContent = '?';
     el.answerSlot.className = 'answer-slot';
     el.feedback.textContent = '';
     el.feedback.className = 'feedback';
     el.blocksArea.style.display = 'none';
-    // 이전 문제의 행을 모두 제거하고 새로 만들기
     el.blocksArea.innerHTML = '';
+    el.nextBtn.style.display = 'none';
+
+    if (state.mode === 'bond') {
+      // 수 가족 모드
+      el.classicDisplay.style.display = 'none';
+      el.bondDisplay.style.display = '';
+      el.helpBtn.style.display = 'none';      // 수 가족 모드에서는 블록 도움 미제공
+      el.mergeBtn.style.display = 'none';
+      generateBondProblem();
+    } else {
+      // 클래식 모드 (블록 더하기)
+      el.classicDisplay.style.display = '';
+      el.bondDisplay.style.display = 'none';
+      el.helpBtn.style.display = '';
+      el.helpBtn.disabled = false;
+      el.mergeBtn.style.display = 'none';
+      el.mergeBtn.disabled = false;
+      generateClassicProblem();
+    }
+  }
+
+  // 클래식 모드: 덧셈만
+  function generateClassicProblem() {
+    let n1, n2;
+    if (state.level === 1) {
+      n1 = Math.floor(Math.random() * 80) + 10;
+      n2 = Math.floor(Math.random() * 8) + 2;
+    } else if (state.level === 2) {
+      n1 = Math.floor(Math.random() * 40) + 10;
+      n2 = Math.floor(Math.random() * 40) + 10;
+    } else {
+      n1 = Math.floor(Math.random() * 40) + 50;
+      n2 = Math.floor(Math.random() * 40) + 50;
+    }
+    state.num1 = n1;
+    state.num2 = n2;
+    state.answer = n1 + n2;
+
+    el.num1.textContent = n1;
+    el.num2.textContent = n2;
+    // 블록 행 새로 만들기
     const newRow1 = document.createElement('div');
     newRow1.className = 'blocks-row';
     newRow1.id = 'row1';
@@ -651,13 +942,70 @@
     el.blocksArea.appendChild(newRow2);
     el.row1 = newRow1;
     el.row2 = newRow2;
-    el.helpBtn.style.display = '';
-    el.helpBtn.disabled = false;
-    el.mergeBtn.style.display = 'none';
-    el.mergeBtn.disabled = false;
-    el.nextBtn.style.display = 'none';
 
-    // 객관식 보기 4개 생성
+    generateChoices();
+  }
+
+  // 수 가족 모드: 빈칸 위치를 다양하게
+  function generateBondProblem() {
+    let whole, p1, p2;
+    if (state.level === 1) {
+      // 쉬움: 두 자리 + 한 자리
+      p1 = Math.floor(Math.random() * 80) + 10; // 10-89
+      p2 = Math.floor(Math.random() * 8) + 2;   // 2-9
+    } else if (state.level === 2) {
+      // 보통: 두 자리 + 두 자리
+      p1 = Math.floor(Math.random() * 40) + 10;
+      p2 = Math.floor(Math.random() * 40) + 10;
+    } else {
+      // 어려움: 합이 100인 쌍 (보수)
+      whole = 100;
+      p1 = Math.floor(Math.random() * 89) + 10; // 10-98
+      p2 = 100 - p1;
+    }
+    if (state.level !== 3) {
+      whole = p1 + p2;
+    }
+    state.bondWhole = whole;
+    state.bondPart1 = p1;
+    state.bondPart2 = p2;
+
+    // 빈칸 위치: whole(합), p1(왼쪽), p2(오른쪽) 중 하나
+    // 어려움(합 100)에서는 whole이 항상 100이라 빈칸을 p1 또는 p2로 (보수 학습)
+    const blankOptions = state.level === 3 ? ['p1', 'p2'] : ['whole', 'p1', 'p2'];
+    state.bondBlank = blankOptions[Math.floor(Math.random() * blankOptions.length)];
+
+    // 정답 결정 + UI 업데이트
+    el.bondWhole.classList.remove('unknown');
+    el.bondPart1.classList.remove('unknown');
+    el.bondPart2.classList.remove('unknown');
+
+    if (state.bondBlank === 'whole') {
+      state.answer = whole;
+      el.bondWhole.textContent = '?';
+      el.bondWhole.classList.add('unknown');
+      el.bondPart1.textContent = p1;
+      el.bondPart2.textContent = p2;
+      el.bondEquation.textContent = `${p1} + ${p2} = ?`;
+    } else if (state.bondBlank === 'p1') {
+      state.answer = p1;
+      el.bondWhole.textContent = whole;
+      el.bondPart1.textContent = '?';
+      el.bondPart1.classList.add('unknown');
+      el.bondPart2.textContent = p2;
+      el.bondEquation.textContent = `? + ${p2} = ${whole}`;
+    } else {
+      state.answer = p2;
+      el.bondWhole.textContent = whole;
+      el.bondPart1.textContent = p1;
+      el.bondPart2.textContent = '?';
+      el.bondPart2.classList.add('unknown');
+      el.bondEquation.textContent = `${p1} + ? = ${whole}`;
+    }
+
+    // 객관식 보기 생성 (state.num1, num2는 오답 후보 만들 때 참고용)
+    state.num1 = p1;
+    state.num2 = p2;
     generateChoices();
   }
 
@@ -846,11 +1194,10 @@
 
         el.blocksArea.appendChild(newRow);
         el.mergeBtn.style.display = 'none';
-        const total = totalTens * 10 + remainingOnes;
         if (remainingOnes === 0) {
-          el.feedback.innerHTML = `10이 <b>${totalTens}</b>개 = <b>${total}</b>! 🎉`;
+          el.feedback.innerHTML = `10이 <b>${totalTens}</b>개! 얼마일까? 🤔`;
         } else {
-          el.feedback.innerHTML = `10이 <b>${totalTens}</b>개, 낱개 <b>${remainingOnes}</b>개 = <b>${total}</b>! 🎉`;
+          el.feedback.innerHTML = `10이 <b>${totalTens}</b>개, 낱개 <b>${remainingOnes}</b>개! 얼마일까? 🤔`;
         }
       }, 600);
     }, 1500);
@@ -866,8 +1213,20 @@
       // 정답!
       state.solved = true;
       btn.classList.add('correct');
-      el.answerSlot.textContent = value;
-      el.answerSlot.classList.add('filled', 'correct-flash');
+      // 모드별로 빈칸 채우기
+      if (state.mode === 'bond') {
+        let bondEl;
+        if (state.bondBlank === 'whole') bondEl = el.bondWhole;
+        else if (state.bondBlank === 'p1') bondEl = el.bondPart1;
+        else bondEl = el.bondPart2;
+        bondEl.textContent = value;
+        bondEl.classList.remove('unknown');
+        bondEl.classList.add('correct-flash');
+        setTimeout(() => bondEl.classList.remove('correct-flash'), 700);
+      } else {
+        el.answerSlot.textContent = value;
+        el.answerSlot.classList.add('filled', 'correct-flash');
+      }
 
       // 별 계산: 난이도별 보상 + 도움/오답에 따라 차등
       // 쉬움/보통/어려움 기본 별 = 1/2/3
@@ -903,8 +1262,17 @@
       // 오답!
       state.wrongCount++;
       btn.classList.add('wrong');
-      el.answerSlot.classList.add('wrong-flash');
-      setTimeout(() => el.answerSlot.classList.remove('wrong-flash'), 500);
+      if (state.mode === 'bond') {
+        let bondEl;
+        if (state.bondBlank === 'whole') bondEl = el.bondWhole;
+        else if (state.bondBlank === 'p1') bondEl = el.bondPart1;
+        else bondEl = el.bondPart2;
+        bondEl.classList.add('wrong-flash');
+        setTimeout(() => bondEl.classList.remove('wrong-flash'), 500);
+      } else {
+        el.answerSlot.classList.add('wrong-flash');
+        setTimeout(() => el.answerSlot.classList.remove('wrong-flash'), 500);
+      }
 
       // 별 차감 (별이 있을 때만)
       if (state.stars > 0) {
@@ -945,6 +1313,31 @@
       star.textContent = '⭐';
       el.starsDisplay.appendChild(star);
     }
+
+    // 업그레이드 가능 여부 체크
+    checkUpgradeAvailability();
+
+    saveProgress();
+  }
+
+  function checkUpgradeAvailability() {
+    if (state.unlocked) {
+      // 이미 잠금 해제됨 → 배너 숨기고 모드 토글 표시
+      el.upgradeBanner.style.display = 'none';
+      el.modeToggle.style.display = 'flex';
+      // 현재 모드 표시
+      document.querySelectorAll('.mode-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.mode === state.mode);
+      });
+    } else if (state.stars >= UPGRADE_THRESHOLD) {
+      // 임계값 도달했는데 아직 잠금 해제 안 됨 → 배너 표시
+      el.upgradeBanner.style.display = 'block';
+      el.modeToggle.style.display = 'none';
+    } else {
+      // 임계값 미달 → 둘 다 숨김
+      el.upgradeBanner.style.display = 'none';
+      el.modeToggle.style.display = 'none';
+    }
   }
 
   function showStarPop(count) {
@@ -977,6 +1370,7 @@
       document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       state.level = parseInt(btn.dataset.level);
+      saveProgress();
       generateProblem();
     });
   });
@@ -984,6 +1378,70 @@
   el.helpBtn.addEventListener('click', showHelp);
   el.mergeBtn.addEventListener('click', mergeIntoTen);
   el.nextBtn.addEventListener('click', generateProblem);
+
+  // 업그레이드 버튼: 클릭하면 잠금 해제 + 수 가족 모드로 전환
+  el.upgradeBtn.addEventListener('click', () => {
+    state.unlocked = true;
+    state.mode = 'bond';
+    saveProgress();
+    checkUpgradeAvailability();
+    generateProblem();
+    // 축하 별 애니메이션
+    showStarPop(5);
+    el.feedback.innerHTML = '🎉 수 가족 모드 시작! 새로운 도전이야!';
+    el.feedback.className = 'feedback correct';
+  });
+
+  // 모드 전환 토글
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.mode = btn.dataset.mode;
+      saveProgress();
+      generateProblem();
+    });
+  });
+
+  // 별 초기화 버튼
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (confirm('모은 별과 잠금 해제를 모두 초기화할까요?')) {
+      state.stars = 0;
+      state.unlocked = false;
+      state.mode = 'classic';
+      updateStars();
+      checkUpgradeAvailability();
+      generateProblem();
+    }
+  });
+
+  // 🔒 부모 모드: 제목을 1.5초 안에 3번 빠르게 탭하면 별 +100
+  let titleTaps = [];
+  document.querySelector('h1').addEventListener('click', () => {
+    const now = Date.now();
+    titleTaps.push(now);
+    titleTaps = titleTaps.filter(t => now - t < 1500);
+    if (titleTaps.length >= 3) {
+      state.stars += 100;
+      updateStars();
+      showStarPop(3);
+      titleTaps = [];
+      // 짧은 피드백 메시지 (아이가 봐도 평범한 응원처럼 보이게)
+      const toast = document.createElement('div');
+      toast.className = 'parent-toast';
+      toast.textContent = '✨ +100 별 ✨';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 1200);
+    }
+  });
+
+  // 저장된 난이도로 active 버튼 복원
+  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.querySelector(`.diff-btn[data-level="${state.level}"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  // 저장된 별 표시
+  updateStars();
 
   // 시작
   generateProblem();
